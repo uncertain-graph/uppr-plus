@@ -5,7 +5,7 @@ Windows 11
 
 ## Datasets:
 Datasets can be downloaded from link: https://sparse.tamu.edu/SNAP and https://sparse.tamu.edu/LAW <br>
-Please create a new folder named "datasets" and save datastes under this folder.
+Please create a new folder named `datasets` and save datastes under this folder.
 
 ## Preparation
 Extract all files from "metismex-master.zip", and execute the file "METIS_startup.m". <br>
