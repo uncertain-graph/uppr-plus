@@ -4,7 +4,7 @@ addpath("..\metismex-master\build\mex\");
 addpath("..\metismex-master\build\src\");
 %run("..\metismex-master\METIS_startup.m");
 
-fpath =  'datasets\';
+fpath =  '..\datasets\';
 fname = 'cit-HepPh';
 
 fn = [fpath, fname, '.mat'];
