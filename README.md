@@ -14,5 +14,5 @@ Create new folders "excel_output" and "results" under the folders "mutual exclus
 ## UPPR+ under Mutual Exclusion semantics
 Run the program "main.m" under the folder "mutual exclusion" (Double check every path in the file when you encounter the "no such file" error.) 
 
-## UPPR+ under Mutual Exclusion semantics
+## UPPR+ under Mutual edge semantics
 Run the program "main.m" under the folder "multiple edge" (Double check every path in the file when you encounter the "no such file" error.) 
