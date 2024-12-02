@@ -1,12 +1,10 @@
 # uppr-plus
 ## Test environment: 
-Matlab
-\\
+Matlab <br>
 Windows
 
 ## Datasets:
-Datasets can be downloaded from link: https://sparse.tamu.edu/SNAP and https://sparse.tamu.edu/LAW
-\\
+Datasets can be downloaded from link: https://sparse.tamu.edu/SNAP and https://sparse.tamu.edu/LAW <br>
 Please create a new folder named "datasets" and save datastes under this folder.
 
 ## Preparation
