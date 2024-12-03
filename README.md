@@ -25,7 +25,7 @@ Run the program `main.m` under the folder `multiple edge` (Double check every pa
 
 ## Accuracy 
 Use `acc.m` to evaluate all PPR results. <br>
-NDCG should be tested in `ndcg.py`. 
+NDCG scores should be tested in `ndcg.py`. 
 
 ## Others
 If you would like to run BEAR, generate collapse-based uncertain graph firstly using `main_gen_collT.m`.
