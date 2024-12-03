@@ -1,8 +1,8 @@
 function  gen_src_tar(ds, l, d)
-    d = d-1;
-    fpath =  '..\';
-    savepath = [fpath,'src_tar\'];
-    
+
+    fpath =  '..\..\datasets\';
+    savepath = '..\src_tar\';
+  
     fn = [fpath, ds, '.mat'];
     load(fn);
     a = Problem.A;
@@ -18,7 +18,7 @@ function  gen_src_tar(ds, l, d)
     tar = cell(l,1);
     for i = 1 : l
         z = find(~a(src(i),:));
-        tar{i} = z(randperm(length(z), d));
+        tar{i} = z(randperm(length(z), d-1));
     end
 
     savefn = [savepath,'ds_',ds,'_l',int2str(l),'_d',int2str(d), '.mat'];
