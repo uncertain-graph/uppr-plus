@@ -1,10 +1,10 @@
 
 clear;
 addpath("..\BLin\");
-addpath("metismex-master\build\mex\");
-addpath("metismex-master\build\src\");
+addpath("..\metismex-master\build\mex\");
+addpath("..\metismex-master\build\src\");
 
-fpath =  'datasets\';
+fpath =  '..\datasets\';
 
 %%%%%%%%%%%%%%%%%%%%% datasets %%%%%%%%%%%%%%%%%%%%%%%%%
 fname = 'cit-HepPh';
