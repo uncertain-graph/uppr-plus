@@ -1,8 +1,8 @@
 function  [ave_pprs, exhApxmem] = exhApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
-
+   fprintf('== exhApx STARTS == \n');
     num_qu_set = numel(qu_set);
 
-    %% compute average ppr
+    %% enumerate all target set of possible worlds
     nedges = numel(src);
     for i = 1:nedges
        target_sets{i} = getAllSubsets(tar{i});
@@ -10,16 +10,8 @@ function  [ave_pprs, exhApxmem] = exhApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
    
     pw = CartesianProduct_multi(target_sets);
 
-    %%
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   npw = 1;%size(pw,2);
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   %%
+    npw = size(pw,2);
    
-
-    % for i = 1:npw
-    %      disp(pw{i})
-    % end
     qppr = 0;
     n = size(a,1);    % # of nodes
     memo = 0;
@@ -40,17 +32,16 @@ function  [ave_pprs, exhApxmem] = exhApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
             % column norm
             n = size(a1,1);    % # of nodes
             d = full(sum(a1,2)); % in-degree vector
-            % d(~d)=1;
-            % w = a1 / spdiags(d', 0, n, n);
+           
             d_inv = 1./d;
             d_inv(~isfinite(d_inv)) = 0;
             w = a1' * spdiags(d_inv, 0, n, n);
             
             [xadj, adjncy] = coo2csr(a1|a1');
-            %npw_preCompute = toc
+          
     
            [rwrs, blinmem] = Blin(w,c,qu_vec,n,ncon,xadj, adjncy, nparts);
-           % [rwrs, par_t, block_inv_t, parts] = Blin(w, c, s, n, ncon, xadj, adjncy, nparts);
+           
            
             pwppr = pwppr + rwrs;
             memo = max(memo, blinmem);
@@ -61,10 +52,9 @@ function  [ave_pprs, exhApxmem] = exhApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
     end
     ave_pprs = qppr / num_qu_set;
    
-
-    %pprs = [pprs ppr];
     me = whos;
     bytes = [me.bytes].';
     exhApxmem = sum(bytes);
-    exhApxmem = sum(bytes)+memo
+    exhApxmem = sum(bytes)+memo;
+     fprintf('== Finished ==\n');
 end

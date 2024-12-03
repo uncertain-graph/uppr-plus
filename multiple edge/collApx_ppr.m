@@ -1,4 +1,5 @@
 function [pprs, collApxmem] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
+    fprintf('== collApx STARTS == \n');
     num_qu_set = numel(qu_set);
     num_src = numel(src);
     tic
@@ -10,14 +11,14 @@ function [pprs, collApxmem] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
    
     pw = CartesianProduct_multi(target_sets);
     npw = size(pw,2);
-    disp(npw);
+
     
     qppr = 0;
     m = size(a, 2);
     sum_unc_a = sparse(m,m);
     memo = 0;
   
-    fprintf("== Start Aggregation == ")
+    fprintf("== Start Aggregation == \n")
     for i = 1 : npw
         %disp(pw{i})
         unc_a = sparse(m,m);
@@ -32,7 +33,7 @@ function [pprs, collApxmem] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
                 end
             end 
          end 
-       % disp(full(unc_a))
+      
         sum_unc_a= sum_unc_a+unc_a;
     end
     fprintf('\n');
@@ -43,13 +44,12 @@ function [pprs, collApxmem] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
     % column norm
     n = size(a2,1);    % # of nodes
     d = full(sum(a2,2));      % in-degree vector
-    % d(~d) = 1;
-    % w = a2 / spdiags(d',0,n,n);
+   
     d_inv = 1./d;
     d_inv(~isfinite(d_inv)) = 0;
     w = a2' * spdiags(d_inv, 0, n, n);
     
-    colApx_preComp_time = toc
+    colApx_preComp_time = toc;
     
     memo = 0;
     pprs=0;
@@ -66,6 +66,6 @@ function [pprs, collApxmem] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
     
     me = whos;
     bytes = [me.bytes].';
-    collApxmem = sum(bytes)+memo
+    collApxmem = sum(bytes)+memo;
     fprintf('== Finished == \n');
 end

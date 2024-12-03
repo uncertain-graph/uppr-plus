@@ -1,11 +1,11 @@
 function [pprs, flatApxmem] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
+    fprintf('== flatApx STARTS == \n');
     num_qu_set = numel(qu_set);
     num_src = numel(src);
     
     tic
     n = size(a,1);
   
-    %tar = cat(1,tar{:});
     % no. of certain and uncertain edges
     ncedges = nnz(a);
     nucedges = size(src, 2);
@@ -25,27 +25,26 @@ function [pprs, flatApxmem] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
          for j = 1:ntargets
              if tar{i}(j)~=0
                 a1(src(i),tar{i}(j)) = (1/ntargets) * certransposs;
-                %a1(tar{i}(j), src(i)) = (1/ntargets) * certransposs;
-                
+              
              end
          end
     end
 
     addtransposs = sum(cell2mat(uncertransposs));
 
-    % uncertain edge 中有non-exist 
+    % uncertain edge have non-existence 
     if any(cellfun(@(x) any(x == 0), tar))
-        % 无certain edge
+        % no certain edge
         if ncedges == 0
             a1(a1 ~= 0) = a1(a1 ~= 0) + (addtransposs * (1 / nucedges));
-           % disp(w)
+          
         else
-            % 有certain edge
+            %  contain certain edge
             a1(a == 1) = certransposs + addtransposs;
             
         end
     else
-          % uncertain edge 中没有non-exist
+          % uncertain edge no non-existemce
          a1(a == 1) = certransposs;
     end
 
@@ -58,15 +57,14 @@ function [pprs, flatApxmem] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
     % column normalization
     n = size(a1,1);    % # of nodes
     d = full(sum(a1,2));      % in-degree vector
-    % d(~d)=1;
-    % w = a1/spdiags(d',0,n,n);
+   
     d_inv = 1./d;
     d_inv(~isfinite(d_inv)) = 0;
     w = a1' * spdiags(d_inv, 0, n, n);
     
     [xadj, adjncy] = coo2csr(w|w');
 
-    flatApx_preCom_time = toc
+    flatApx_preCom_time = toc;
    
     memo = 0;
     pprs = 0;
@@ -81,5 +79,6 @@ function [pprs, flatApxmem] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
 
     me = whos;
     bytes = [me.bytes].';
-    flatApxmem = sum(bytes)+memo
+    flatApxmem = sum(bytes)+memo;
+    fprintf('== Finished == \n');
 end

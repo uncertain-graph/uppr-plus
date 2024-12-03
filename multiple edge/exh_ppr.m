@@ -1,5 +1,5 @@
 function [ave_pprs, exhmem] = exh_ppr(a, c, qu_set, src, tar, kmax)
-   
+   fprintf('== exh STARTS == \n');
    num_qu_set = numel(qu_set);
    num_src = numel(src);
    %% enumerate all target set of possible worlds
@@ -9,7 +9,7 @@ function [ave_pprs, exhmem] = exh_ppr(a, c, qu_set, src, tar, kmax)
    end
    
    pw = CartesianProduct_multi(target_sets);
-   npw = size(pw,2)
+   npw = size(pw,2);
 
    % for i = 1:npw
    %      disp(pw{i})
@@ -22,6 +22,11 @@ function [ave_pprs, exhmem] = exh_ppr(a, c, qu_set, src, tar, kmax)
         qu_vec = sparse(qu_set{qu}', 1, 1/nqu, n, 1);
         pwppr = 0;
         for i = 1 : npw
+
+            if mod(i, ceil(npw/50)) == 0
+                fprintf('.');
+            end
+
             a1 = a;
             for p =1:size(src,2)
                  %disp(pw{i})
@@ -58,6 +63,6 @@ function [ave_pprs, exhmem] = exh_ppr(a, c, qu_set, src, tar, kmax)
     
     me = whos;
     bytes = [me.bytes].';
-    exhmem = sum(bytes) + memo
-
+    exhmem = sum(bytes) + memo;
+    fprintf('\n== Finished ==\n');
 

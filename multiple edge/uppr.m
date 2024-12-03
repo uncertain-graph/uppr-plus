@@ -1,5 +1,5 @@
 function [ave_pprs,  upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar)
-    
+    fprintf('== UPPR STARTS == \n');
     num_qu_set = numel(qu_set);
     num_src = numel(src);
     %% enumerate possible uncertainity and sum of all uncertainity as P
@@ -15,7 +15,7 @@ function [ave_pprs,  upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     P = sparse(n,n);
 
     tic
-    fprintf('== Start P aggregation == ');
+    fprintf('== Start P aggregation == \n');
     for i = 1:npw
        if mod(i, ceil(npw/50)) == 0
            fprintf('.');
@@ -78,6 +78,6 @@ function [ave_pprs,  upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     
     me = whos;
     bytes = [me.bytes].';
-    upprmem = sum(bytes)
+    upprmem = sum(bytes);
     fprintf('== Finished ==\n')
 end

@@ -21,10 +21,7 @@ function [ave_qres, upprplusmem] = uppr_plus_v2(a, c, qu_set, I, tar, fname)
    J = CartesianProduct_multi(target_sets);
    uds = CartesianProduct_multi(len_target_sets);
    npw = size(J,2);
-   fprintf('npw: %d',npw);
-   % for i = 1:npw
-   %      disp(pw{i})
-   % end
+ 
    time_total = tic;
    
    %%%%%%%%%%%%%%%%% pre-computing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -38,9 +35,7 @@ function [ave_qres, upprplusmem] = uppr_plus_v2(a, c, qu_set, I, tar, fname)
    d_inv(~isfinite(d_inv)) = 0;
    T0 = a' * spdiags(d_inv, 0, n, n);
 
-   % R = inv(eye(n)-c*T0);
-   % Ri = R(I,:);
-   % Rii = R(I,I);
+  
    ei = sparse((1:l)', I', ones(l,1), l, n);
    ei=full(ei);
    
@@ -54,10 +49,9 @@ function [ave_qres, upprplusmem] = uppr_plus_v2(a, c, qu_set, I, tar, fname)
    lu_inv = toc(ilutime)
     
    Ri = full(r);  
-   % Ri = R(I,:);
+   
    Rii = Ri(:,I);
    
-   %d = full(sum(T0(:,I)~=0,1));
    Dii = diag(d(I));
 
    period2 = toc(time2);
@@ -85,56 +79,33 @@ function [ave_qres, upprplusmem] = uppr_plus_v2(a, c, qu_set, I, tar, fname)
         nw = sparse(n,1);
    %%%%%%%% average hw, nw over pws %%%%%%%%%%%%%%%%%%%%%%%%     
 
-        fprintf('Start ');
+        fprintf('Start \n');
         for w = 1:npw
             if mod(w, ceil(npw/50)) == 0
                 fprintf('.');
             end
             Jw = J{w};
-            %ud  = cellfun(@length, Jw);
+           
             ud = cat(2,uds{w}{:});
-            %lambda1 = diag(ud);
-            
-            
-            % ej = sparse(n,l);
-
             Rij = sparse(l,l);
             for i = 1:l
-                % tmp = 0;
+              
                 Rij(:,i) = sum(Ri(:,Jw{i}),2);
-                % for j =1:size(Jw{i},2)
-                %     if Jw{i}(j) 
-                %         tmp = tmp + Ri(:,Jw{i}(j));
-                %         %Riej(i,Jw{i}(j) ) = tmp+ ud(i);
-                %     end
-                %     %ej(Jw{i}(j),i)=1;  
-                % end
-                % Rij(:,i) = tmp;
+              
             end
-            %Riej = full(Riej)
-            %ejR = Ri*ej
+           
             lambdaRii = (l1*ud).*Rii;
 
             hw1 = (Dii-c*Rij+lambdaRii)\p0I;
-            %hw1 = (Dii-c*Ri*ej+(l1*ud).*Rii)\p0I;
+           
             
-            %E1 = En(:,I)*lambda1*hw1;
-            %disp(full(ej))
-            %nw1 = ej*c*hw1
-            
-            %eta = sparse(n,1);
+           
             eta1 = sparse(n,1);
             for i = 1:l
                  eta1(Jw{i}) = eta1(Jw{i})+c*hw1(i);
-                % for j =1:size(Jw{i},2)
-                %     if Jw{i}(j) 
-                %         tmp =  eta(Jw{i}(j));
-                %         eta(Jw{i}(j)) = tmp+ c*hw1(i);
-                %     end
-                % end
-               % Riej(:,i) = tmp;
+             
             end
-            %nw1 = full(nw1)
+         
 
             lambda_hw = lambda_hw + ud'.*hw1;
             nw = nw + eta1;
