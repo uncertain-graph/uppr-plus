@@ -17,3 +17,10 @@ Run the program `main.m` under the folder `mutual exclusion` (Double check every
 
 ## UPPR+ under Multiple edge semantics
 Run the program `main.m` under the folder `multiple edge` (Double check every path in the file when you encounter the "no such file" error.) 
+
+## Accuracy 
+Use `acc.m` to evaluate all PPR results. <br>
+NDCG should be tested in `ndcg.py`. 
+
+## Others
+If you would like to run BEAR, generate collapse-based uncertain graph firstly using `main_gen_collT.m`.
