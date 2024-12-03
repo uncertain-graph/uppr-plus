@@ -10,6 +10,7 @@ Please create a new folder named `datasets` and save datastes under this folder.
 ## Preparation
 ### Preparation for METIS
 Extract all files from `metismex-master.zip`, and execute the file `METIS_startup.m`. <br>
+The zip file modified based on Yingzhou's package from: https://github.com/YingzhouLi/metismex
 
 ### Preparation for uncertain source and target nodes
 Run `main_gen_src_tar.m` to generate src and target nodes in `mutual exclusion` and `multiple edge`.
