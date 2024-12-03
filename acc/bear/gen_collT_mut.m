@@ -1,7 +1,7 @@
 function gen_collT_mut(ds, src, tar)
 
     fpath =  '..\..\datasets\';
-    savefpath = '..\data\';
+    savefpath = 'data\';
     savepath = [savefpath];
     fn = [fpath, ds, '.mat'];
     load(fn);
