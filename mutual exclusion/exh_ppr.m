@@ -48,6 +48,6 @@ function [ave_pprs, exhmem] = exh_ppr (a, src, tar, c, qu_set, kmax)
     
     
     mem = whos;
-    exhmem = sum([mem.bytes]) + memo
+    exhmem = sum([mem.bytes]) + memo;
 
 
