@@ -1,7 +1,8 @@
 function [ave_pprs, exhmem] = exh_ppr (a, src, tar, c, qu_set, kmax)
     num_qu_set = numel(qu_set);
     num_src = numel(src);
-
+    
+    fprintf('\n >>>>>>>>> exh starts >>>>>>>>>>>>>>\n');
     %% enumerate all target set of possible worlds
     pw = cell(1, numel(tar));
     [pw{:}] = ndgrid(tar{:});
@@ -48,6 +49,6 @@ function [ave_pprs, exhmem] = exh_ppr (a, src, tar, c, qu_set, kmax)
     
     
     mem = whos;
-    exhmem = sum([mem.bytes]) + memo;
+    exhmem = sum([mem.bytes]) + memo
 
 

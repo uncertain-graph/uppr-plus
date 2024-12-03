@@ -1,7 +1,7 @@
 function  [pprs, exhApxme] = exhApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
 
     num_qu_set = numel(qu_set);
-
+    fprintf('\n >>>>>>>>> exhApx starts >>>>>>>>>>>>>>\n');
     %% enumerate all target set of possible worlds
     pw = cell(1, numel(tar));
     [pw{:}] = ndgrid(tar{:});

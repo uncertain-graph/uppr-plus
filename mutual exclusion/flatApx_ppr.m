@@ -1,7 +1,7 @@
 function [pprs, flatApxme] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
     num_qu_set = numel(qu_set);
     num_src = numel(src);
-    
+    fprintf('\n >>>>>>>>> flatApx starts >>>>>>>>>>>>>>\n');
     tic
     n = size(a,1);
   
@@ -66,7 +66,7 @@ function [pprs, flatApxme] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
     
     [xadj, adjncy] = coo2csr(w|w');
 
-    flatApx_preCom_time = toc
+    flatApx_preCom_time = toc;
    
     memo = 0;
     pprs = 0;
@@ -81,5 +81,5 @@ function [pprs, flatApxme] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
 
     me = whos;
     bytes = [me.bytes].';
-    flatApxme = sum(bytes)+memo
+    flatApxme = sum(bytes)+memo;
 end

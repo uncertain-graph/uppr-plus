@@ -1,9 +1,10 @@
 function [ave_pprs,  upprme] = uppr(a, c, qu_set, ncon, nparts, src, tar)
-    
+    fprintf('\n >>>>>>>>> UPPR starts >>>>>>>>>>>>>>\n');
     num_qu_set = numel(qu_set);
     num_src = numel(src);
     n = size(a,1);
     
+    fprintf('>>>>>>>>> Precomputation starts >>>>>>>>>>>>>>\n');
     %% enumerate possible uncertainity and sum of all uncertainity as P
     pw = cell(1, numel(tar));
     [pw{:}] = ndgrid(tar{:});
@@ -12,10 +13,8 @@ function [ave_pprs,  upprme] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     npw = size(tars, 1); 
     n = size(a,1);
     P = sparse(n,n);
-
-    tic
     for i = 1:npw
-        %tmp = sparse(n,n);
+        
 
         for j = 1:num_src
             if tars(i,j)
@@ -26,6 +25,7 @@ function [ave_pprs,  upprme] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     end
 
     %% Inverse certainity
+   
     % column normalization of certain transition matrix
     d = full(sum(a,2));      % in-degree vector
     d_inv = 1./d;
@@ -52,7 +52,7 @@ function [ave_pprs,  upprme] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     
     %% Compute UPPR
     pprs = 0;
-
+    fprintf('>>>>>>>>> Query starts >>>>>>>>>>>>>>\n');
     for qu = 1 : num_qu_set
         nqu = numel(qu_set{qu});
         qu_vec = sparse(qu_set{qu}', 1, 1/nqu, n, 1);
@@ -77,5 +77,5 @@ function [ave_pprs,  upprme] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     
     me = whos;
     bytes = [me.bytes].';
-    upprme = sum(bytes)
+    upprme = sum(bytes);
 end

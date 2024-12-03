@@ -1,7 +1,7 @@
 function [pprs, collApxme] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
     num_qu_set = numel(qu_set);
     num_src = numel(src);
-
+    fprintf('\n >>>>>>>>> collApx starts >>>>>>>>>>>>>>\n');
     %% enumerate all target set of possible worlds
     pw = cell(1, numel(tar));
     [pw{:}] = ndgrid(tar{:});
@@ -9,8 +9,7 @@ function [pprs, collApxme] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
     
 
     npw = size(tars,1);
-    disp(npw)
-    %disp(tars)
+
     m = size(a, 2);
     unc_a = sparse(m,m);
     tic
@@ -38,7 +37,7 @@ function [pprs, collApxme] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
     d_inv(~isfinite(d_inv)) = 0;
     w = a2' * spdiags(d_inv, 0, n, n);
     
-    colApx_preComp_time = toc
+    colApx_preComp_time = toc;
     
     blint = tic;
     memo = 0;
@@ -52,9 +51,9 @@ function [pprs, collApxme] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
         pprs = pprs + ppr;
     end
     pprs = pprs / num_qu_set;
-    blintime = toc
+    blintime = toc;
     
     me = whos;
     bytes = [me.bytes].';
-    collApxme = sum(bytes)+memo
+    collApxme = sum(bytes)+memo;
 end

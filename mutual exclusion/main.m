@@ -15,7 +15,7 @@ a = Problem.A;
 m = nnz(a);
 n = size(a,2);
 c = 0.8;
-kmax = 100;
+kmax = 50;
 ncon = 1;
 nparts = 5;
 
@@ -23,8 +23,8 @@ nparts = 5;
 l = 6;
 d = 4;
 
-src_tarfpath = [fpath,'src_tar\','ds_',fname,'_l',int2str(l),'_d',int2str(d),'.mat'];
-qufpath = [fpath,'qu\','ds_',fname,'_qu','.mat'];
+src_tarfpath = ['src_tar\','ds_',fname,'_l',int2str(l),'_d',int2str(d),'.mat'];
+qufpath = ['qu\','ds_',fname,'_qu','.mat'];
 
 src = load(src_tarfpath).src;
 
@@ -34,7 +34,17 @@ qu_set = load(qufpath).qu;
 
 savefpath = 'results\';
 savefn = [savefpath, fname,'_l',int2str(l),'_d',int2str(d),'_res', '.mat'];
-%%%%%%%%%%%%%%%%% PPR computation %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% PPR computation %%%%%%%%%%%%%%%%%%%%%%%%%%
+upprplust = tic;
+[res_upprplus, upprplusmem] = uppr_plus(a, c, qu_set, src, tar, fname);
+upprplus_time=toc(upprplust);
+save(savefn, "res_upprplus","-append") 
+
+upprt = tic;
+[res_uppr, upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar);
+uppr_time = toc(upprt);
+save(savefn, "res_uppr","-append") 
+
 [gt, exhmem]  = exh_ppr(a, src, tar, c, qu_set, 100);
 save(savefn, "gt")
 
@@ -47,16 +57,6 @@ exhApxt = tic;
 [res_exhApx, exhApxmem]= exhApx_ppr(a, c, qu_set, src, tar, ncon, nparts);
 exhApx_time = toc(exhApxt);
 save(savefn, "res_exhApx","-append")
-
-upprplust = tic;
-[res_upprplus, upprplusmem] = uppr_plus(a, c, qu_set, src, tar, fname);
-upprplus_time=toc(upprplust);
-save(savefn, "res_upprplus","-append") 
-
-upprt = tic;
-[res_uppr, upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar);
-uppr_time = toc(upprt);
-save(savefn, "res_uppr","-append") 
  
 collApxt = tic;
 [res_collApxppr, collApxmem] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts);
@@ -68,15 +68,15 @@ flatApxt = tic;
 flatApx_time = toc(flatApxt);
 save(savefn, "res_flatApx","-append")
 
-%%%%%%%%%% save results %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% save results %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 alg = {'upprplus';'uppr';'exh'; 'exhApx';'collApx';'flatApx'};
-%%%%%%%%%%% save time %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% save time %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 time = [upprplus_time; uppr_time; exh_time; exhApx_time; collApx_time; flatApx_time];
 filename = 'excel_output\timeppr.xlsx';
 T1 = rows2vars(table(alg, time))
 writetable(T1, filename, 'Sheet',1, 'Range','D1');
 
-%%%%%%%%%%% save memory %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% save memory %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 memo = [upprplusmem; upprmem; exhmem; exhApxmem; collApxmem; flatApxmem];
 filename = 'excel_output\memoryppr.xlsx';
 T2 = rows2vars(table(alg, memo))
