@@ -15,7 +15,7 @@ a = Problem.A;
 m = nnz(a);
 n = size(a,2);
 c = 0.8;
-kmax = 1;
+kmax = 100;
 ncon = 1;
 nparts = 5;
 
@@ -35,7 +35,7 @@ qu_set = load(qufpath).qu;
 savefpath = 'results\';
 savefn = [savefpath, fname,'_l',int2str(l),'_d',int2str(d),'_res', '.mat'];
 %%%%%%%%%%%%%%%%% PPR computation %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-[gt, exhmem]  = exh_ppr(a, src, tar, c, qu_set, 1);
+[gt, exhmem]  = exh_ppr(a, src, tar, c, qu_set, 100);
 save(savefn, "gt")
 
 exht = tic;
