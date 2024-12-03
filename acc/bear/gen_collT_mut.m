@@ -1,12 +1,8 @@
 function gen_collT_mut(ds, src, tar)
 
-    fpath =  'C:\Users\u5550119\OneDrive - University of Warwick\Documents\PageRank\pageRank\datasets\';
-    savefpath = 'C:\Users\u5550119\Downloads\bear-master\bear-master_v1_norm_mod\data\';
-    savepath = [savefpath,'\bear\'];
-    % soc-LiveJournal1
-    % it-2004
-    % email-EuAll web-Stanford cit-Patents soc-LiveJournal1 
-    % uk-2002  arabic-2005  sk-2005
+    fpath =  '..\..\datasets\';
+    savefpath = '..\data\';
+    savepath = [savefpath];
     fn = [fpath, ds, '.mat'];
     load(fn);
     a = Problem.A;
