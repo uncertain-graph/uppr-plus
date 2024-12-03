@@ -2,8 +2,8 @@
 clear;
 res_path = 'results\';
 
-load([res_path, '%%%%result file%%%%%%'])
-bear = load([res_path,'%%%%result file of bear%%%%%%']).bearppr;
+load([res_path, '%%%%%%resulte file%%%%%'])
+bear = load([res_path,'%%%%%%resulte file of bear%%%%%']).bearppr;
 
 k = 50;
 k = min(k, length(gt));
