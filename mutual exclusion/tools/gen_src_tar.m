@@ -1,18 +1,15 @@
 function  gen_src_tar(ds, l, d)
 
-    fpath =  '/dcs/large/u5550119/datasets/';
-    savepath = [fpath,'src_tar_mule/'];
-    % soc-LiveJournal1
-    % it-2004
-    % email-EuAll web-Stanford cit-Patents soc-LiveJournal1 
-    % uk-2002  arabic-2005  sk-2005
+    fpath =  '..\datasets\';
+    savepath = [fpath,'src_ta\'];
+  
     fn = [fpath, ds, '.mat'];
     load(fn);
     a = Problem.A;
 
    
     n = length(a);
-    %src =  randperm(n, l);
+
     G = digraph(a);
     D = outdegree(G);
     [hd, idx] =  sort(D, "descend");
