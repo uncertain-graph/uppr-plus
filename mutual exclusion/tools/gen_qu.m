@@ -1,6 +1,6 @@
 function gen_qu(ds)
     fpath =  '..\..\datasets\';
-    savepath = '..\qu\';
+    savepath ='..\qu\';
    
     fn = [fpath, ds, '.mat'];
     load(fn);
