@@ -1,6 +1,6 @@
 function gen_collT_mtp(ds, src, tar)
 
-    fpath =  '..\datasets\';
+    fpath =  '..\..\datasets\';
     savefpath = '\data\';
     savepath = [savefpath];
 
