@@ -1,6 +1,6 @@
 function  gen_src_tar(ds, l, d)
     d = d-1;
-    fpath =  '..\datasets\';
+    fpath =  '..\';
     savepath = [fpath,'src_tar\'];
     
     fn = [fpath, ds, '.mat'];
