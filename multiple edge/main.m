@@ -1,6 +1,6 @@
 
 clear;
-addpath("BLin\");
+addpath("..\BLin\");
 addpath("metismex-master\build\mex\");
 addpath("metismex-master\build\src\");
 
