@@ -1,10 +1,7 @@
 function gen_qu(ds)
-    fpath =  '/dcs/large/u5550119/datasets/';
-    savepath = [fpath,'qu/'];
-    % soc-LiveJournal1
-    % it-2004
-    % email-EuAll web-Stanford cit-Patents soc-LiveJournal1 
-    % uk-2002  arabic-2005  sk-2005
+    fpath =  '..\datasets\';
+    savepath = [fpath,'qu\'];
+   
     fn = [fpath, ds, '.mat'];
     load(fn);
     a = Problem.A;
