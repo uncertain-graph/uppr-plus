@@ -1,7 +1,7 @@
 # uppr-plus
 ## Test environment: 
 Matlab R2023b <br>
-Windows 11
+Windows 10/11
 
 ## Datasets:
 Datasets can be downloaded from links: https://sparse.tamu.edu/SNAP and https://sparse.tamu.edu/LAW <br>
