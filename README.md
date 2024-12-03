@@ -4,7 +4,7 @@ Matlab R2023b <br>
 Windows 11
 
 ## Datasets:
-Datasets can be downloaded from link: https://sparse.tamu.edu/SNAP and https://sparse.tamu.edu/LAW <br>
+Datasets can be downloaded from links: https://sparse.tamu.edu/SNAP and https://sparse.tamu.edu/LAW <br>
 Please create a new folder named `datasets` and save datastes under this folder.
 
 ## Preparation
