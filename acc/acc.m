@@ -1,9 +1,10 @@
 %% load results
-clear;
-load(['%%%%%%% result file %%%%%%%%%'])
+%clear;
+load(['cit-HepPh_l2_d2_res.mat'])
 
-%%%%%% load bear and decomment the map score of bear below %%%%%%%%%%%%
-%load(['%%%%%%%%%%%% result of bear %%%%%%%%%%%%%']).bearppr
+%%%%%% if you load bear you need to decomment %%%%%%%
+%%%%%% scores of bear below %%%%%%%%%%%%%%%%%%%
+%load(['%%%%%%%%%%%% result of bear %%%%%%%%%%%%%']).r
 k = 50;
 k = min(k, length(gt));
 
@@ -15,6 +16,7 @@ k = min(k, length(gt));
 [rho_flatApxPPR, ~] = corr(res_flatApx, gt, 'Type', 'Spearman');
 [rho_upprE5, ~] = corr(res_uppr, gt, 'Type', 'Spearman');
 [rho_inc, ~] = corr(res_upprplus, gt, 'Type', 'Spearman');
+%[rho_bear, ~] = corr(r, gt, 'Type', 'Spearman');
 
 %% Kendall's Tau 
 [tau_exhppr, ~] = corr(res_exh, gt, 'Type', 'Kendall');
@@ -23,6 +25,7 @@ k = min(k, length(gt));
 [tau_flatApxPPR, ~] = corr(res_flatApx, gt, 'Type', 'Kendall');
 [tau_upprE5, ~] = corr(res_uppr, gt, 'Type', 'Kendall');
 [tau_inc, ~] = corr(res_upprplus, gt, 'Type', 'Kendall');
+%[tau_r, ~] = corr(r, gt, 'Type', 'Kendall');
 
 %% MAP
 map_exhppr = map(res_exh, gt);
@@ -40,6 +43,7 @@ euc_collApxppr = norm(res_collApxppr - gt);
 euc_flatApxPPR = norm(res_flatApx - gt);
 euc_upprE5 = norm(res_uppr - gt);
 euc_inc = norm(res_upprplus - gt);
+%euc_r = norm(r - gt);
 
 %% save in excel
 map = [map_inc, map_upprE5,map_exhppr map_exhApxppr  map_collApxppr   map_flatApxPPR]';
