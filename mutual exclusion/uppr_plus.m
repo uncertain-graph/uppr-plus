@@ -20,49 +20,38 @@ function [ave_qres, incme] = uppr_plus(a, c, qu_set, src, tar, fname)
     %%%%%%%%%%%%%% possible worlds %%%%%%%%%%%%%%%%%%%%%%
     % possible target sets 
     tar0 = cellfun(@(x) x, tar, 'UniformOutput', false);
-    % tar0 = cellfun(@(x) [0 x], tar, 'UniformOutput', false); % add non-existence for each target node set. 
     tars = cell(1,nsrc);
     [tars{end:-1:1}] = ndgrid(tar0{end:-1:1}); 
-    % tar0{end:-1:1} reverse; 
     % ndgrid replicates the grid vectors x1,x2,...,xn to produce an n-dimensional full grid.
     tars = cat(nsrc+1, tars{:});
-    tars = reshape(tars,[],nsrc);  % npw x nsrc matrix
+    tars = reshape(tars,[],nsrc); 
 
     %%%%%%%%%%%%%%%% index possible worlds %%%%%%%%%%%%%%
     time_total = tic;
     npw = size(tars,1);
-    %disp(npw)
-    
+  
     fprintf('\n== BEGIN pre-computing ==\n');
     time2 = tic;
+
     % same column norm as UPPR
-    
     n = size(a,1);    % # of nodes
     d = full(sum(a,2));      % in-degree vector
     d_inv = 1./d;
     d_inv(~isfinite(d_inv)) = 0;
     q0 = a' *spdiags(d_inv, 0, n, n);
-
-  
     clear a;
     
-    %q0 is col_normed
-    %r = inv(eye(n,n) - c*q0);
-    
-    % iterate ei 
     %%% r = ei*(I-cQ)^-1 pre-computing for the later indexing, containing
     %%% [(I-cQ)^-1]i,j , [(I-cQ)^-1]i,i and others.
     ei = sparse((1:nsrc)', src', ones(nsrc,1), nsrc, n);
     ei=full(ei);
     
-    %ilutime = tic;
     T = speye(n) - c * q0;
     [L,U] = ilu(T); 
     
     x = ei / U;
     r = x / L;
-   % lu_inv = toc(ilutime)
-    
+ 
     r = full(r);  
     period2 = toc(time2);
     fprintf('== END pre-computing ==\n');
@@ -77,17 +66,11 @@ function [ave_qres, incme] = uppr_plus(a, c, qu_set, src, tar, fname)
         if (mod(qu, 1) == 0)
             fprintf(' query #%d\n', qu);
         end
-         ppr0 = lu_ppr(L,U, quvec, c);      
-        % ppr0 = ppr_iter(q0, qu{ii}, c, kmax);
-     
-    %    z = inv_b * ppr0(src_1);
-    %    sumh = z;
-    %    z = ppr0;
-    %    sumh = z;
-    %    hh = sparse(tars(1,:), ones(numel(tars(1,:)),1), z, n, 1);
+        ppr0 = lu_ppr(L,U, quvec, c);      
+    
         h = zeros(nsrc,1);
         eta = sparse(n,1);
-
+     %%%%%%%% average hw, nw over pws %%%%%%%%%%%%%%%%%%%%%%%% 
         for i=1:npw      
             tar_i = tars(i,:);
             idx_i = find(tar_i);
@@ -95,16 +78,13 @@ function [ave_qres, incme] = uppr_plus(a, c, qu_set, src, tar, fname)
             src_i = src(idx_i)';
             ntar_i = numel(tar_i);
             
-            
             h_w = inv(diag(d(src_i))-c*r(idx_i,tar_i)+r(idx_i,src_i))*ppr0(src_i);
-            %h_w = gmres((diag(d(src_i))-c*r(idx_i,tar_i)+r(idx_i,src_i)), ppr0(src_i));
             eta_w = sparse(tar_i, 1, c*h_w, n, 1);
 
             h = h + h_w;
             eta = eta + eta_w;
-
         end
-
+         %%%%%%%% advancing aggregation end %%%%%%%%%%%%%%%%%%%%%%%%%%%%
         xi = sparse(src_i, 1, h/npw, n, 1);  
         zeta = eta/npw - xi;
         
@@ -113,8 +93,9 @@ function [ave_qres, incme] = uppr_plus(a, c, qu_set, src, tar, fname)
         qres = qres + res;
     end
     ave_qres = qres/num_qu_set;
-    %ave_qres = ave_qres/norm(ave_qres);
-    
+
+
+    %%%%%%%% printing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     period3 = toc(time3);
     fprintf('== END online query ==\n');
     period_total = toc(time_total);
