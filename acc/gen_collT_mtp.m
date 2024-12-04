@@ -23,26 +23,25 @@ function a2 = gen_collT_mtp(ds, src, tar)
     qppr = 0;
     m = size(a, 2);
     sum_unc_a = sparse(m,m);
-    memo = 0;
-  
+    
     for i = 1 : npw
-      
+        %disp(pw{i})
         unc_a = sparse(m,m);
-         if mod(i,100)==0
-            fprintf('.');
+         if mod(i, ceil(npw/50)) == 0
+           fprintf('.');
          end
 
          for p =1:size(src,2)
             for r = 1:size(pw{i}{p},2)
                 if pw{i}{p}(r)
-                    tmp = unc_a(src(p),pw{i}{p}(r));
-                    unc_a(src(p),pw{i}{p}(r)) = tmp+1;
+                    unc_a(src(p),pw{i}{p}(r)) = 1;
                 end
             end 
          end 
+      
+        sum_unc_a= sum_unc_a+unc_a;
     end
-    fprintf('\n');
-    a2 = a + unc_a / npw;
+    a2 = a + sum_unc_a / npw;
     %%%%%%%%% a2 should be used to compute BEAR %%%%%%%%%%%%%%%%
 
     % [i,j] = find(a2);

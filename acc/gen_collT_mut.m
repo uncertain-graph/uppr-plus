@@ -17,24 +17,26 @@ function a2 = gen_collT_mut(ds, src, tar)
     npw = size(tars,1);
     
     m = size(a, 2);
-    unc_a = sparse(m,m);
+   sum_unc_a = sparse(m,m);
 
     
    % tic
 
     for i = 1 : npw
-        if mod(i,100)==0
-           fprintf('.');
-        end
+        if mod(i, ceil(npw/50)) == 0
+                fprintf('.');
+            end
         for j = 1: numel(src)
             if tars(i,j)
-                tmp = unc_a(src(j),tars(i,j));
-                unc_a(src(j),tars(i,j)) = tmp + 1;
+               
+                unc_a(src(j),tars(i,j)) =  1;
             end
         end
+        sum_unc_a= sum_unc_a+unc_a;
     end
-    fprintf('\n');
-    a2 = a + unc_a / npw;
+    
+    %% compute average ppr
+    a2 = a + sum_unc_a / npw;
     %%%%%%%%% a2 should be used to compute BEAR %%%%%%%%%%%%%%%%
 
     % [i,j] = find(a2);
