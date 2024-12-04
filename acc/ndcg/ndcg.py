@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Sep 27 12:01:09 2024
-
-@author: u5550119
 """
 
 import scipy.io
@@ -13,20 +11,17 @@ import numpy as np
 
  
 
-filename = 'cit-HepPh_l4_d3_res.mat';
+filename = '#### result file ####';
 res = scipy.io.loadmat(filename)
 
-ground_truth = res['res_exh']
+ground_truth = res['gt']
 
 exh = res['res_exh']
 exhapx = res['res_exhApx']
-
 collapx = res['res_collApxppr']
-
 flatapx = res['res_flatApx']
 uppr = res['res_uppr']
 inc  = res['res_upprplus']
-
 
 ppr = [inc, uppr, exhapx, collapx, flatapx]
 alg = ['upprplus','uppr', 'exhapx',  'collapx', 'flatapx']
