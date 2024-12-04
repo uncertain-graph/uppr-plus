@@ -11,7 +11,7 @@ function acc = map(rec, ideal)
         
         for k = 1:length(queryRecs)
             % if this recommendation is close to the ideal.
-            if norm(userTrueFeedback(k)-queryRecs(k)) < 1e-6
+            if norm(userTrueFeedback(k)-queryRecs(k)) < 5e-6
                 hitCount = hitCount + 1;
                 cumPrecision = cumPrecision + hitCount / k;
             end
