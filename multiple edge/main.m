@@ -35,31 +35,6 @@ qu_set = load(qufpath).qu;
 savefpath = 'results\';
 savefn = [savefpath, fname,'_l',int2str(l),'_d',int2str(d),'_res', '.mat'];
 save(savefn, 'fname');
-a = sparse([ 
-     0     1     0     0     0     0     0     0
-     0     0     0     1     0     0     0     0
-     0     0     0     1     0     0     0     0
-     0     0     0     0     0     0     0     0
-     0     0     0     1     0     1     0     0
-     0     0     0     0     0     0     0     0
-     0     0     0     0     1     1     0     0
-     0     0     0     0     0     0     0     0
-    ]);
-
-
-%%%%%%%%%%%%%%%% hyperparameter %%%%%%%%%%%%%%%%%%%%%%%%
-m = nnz(a);
-n = size(a,2);
-c = 0.8;
-kmax = 1000;
-ncon = 1;
-nparts = 2;
-
-%%%%%%%%%%%%%%%%% src tar qu %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-src = [3,4,7];
-tar = {[5,6,8],[1],[4,8]};
-
-qu_set = {[2 5 7]};
 %%%%%%%%%%%%%%%%%%%%%%%%%% PPR Calculations %%%%%%%%%%%%%%
 upprplust = tic;
 [res_upprplus, upprplusmem] = uppr_plus(a, c, qu_set, src, tar, fname);
