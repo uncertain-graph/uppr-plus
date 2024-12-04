@@ -38,7 +38,7 @@ savefn = [savefpath, fname,'_l',int2str(l),'_d',int2str(d),'_res', '.mat'];
 upprplust = tic;
 [res_upprplus, upprplusmem] = uppr_plus(a, c, qu_set, src, tar, fname);
 upprplus_time=toc(upprplust);
-save(savefn, "res_upprplus","-append") 
+save(savefn, "res_upprplus") 
 
 upprt = tic;
 [res_uppr, upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar);
@@ -46,7 +46,7 @@ uppr_time = toc(upprt);
 save(savefn, "res_uppr","-append") 
 
 [gt, exhmem]  = exh_ppr(a, src, tar, c, qu_set, 100);
-save(savefn, "gt")
+save(savefn, "gt","-append")
 
 exht = tic;
 [res_exh, exhmem]  = exh_ppr(a, src, tar, c, qu_set, kmax);
