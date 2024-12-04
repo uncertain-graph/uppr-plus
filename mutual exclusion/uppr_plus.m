@@ -121,7 +121,7 @@ function [ave_qres, incme] = uppr_plus(a, c, qu_set, src, tar, fname)
 
     me = whos;
     bytes = [me.bytes].';
-    incme = sum(bytes)
+    incme = sum(bytes);
 
     fprintf('\n\n========== total stats (UPPR+) ============\n\n');
     

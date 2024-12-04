@@ -2,7 +2,7 @@ function [ave_pprs, exhmem] = exh_ppr (a, src, tar, c, qu_set, kmax)
     num_qu_set = numel(qu_set);
     num_src = numel(src);
     
-    fprintf('\n >>>>>>>>> exh starts >>>>>>>>>>>>>>\n');
+    fprintf('== exh STARTS == \n');
     %% enumerate all target set of possible worlds
     pw = cell(1, numel(tar));
     [pw{:}] = ndgrid(tar{:});
@@ -18,7 +18,9 @@ function [ave_pprs, exhmem] = exh_ppr (a, src, tar, c, qu_set, kmax)
         qu_vec = sparse(qu_set{qu}', 1, 1/nqu, n, 1);
         pwppr = 0;
         for i = 1 : npw
-            
+            if mod(i, ceil(npw/50)) == 0
+                fprintf('.');
+            end
             % construct a1
             a1 = a;
             for j = 1 : num_src 
@@ -49,6 +51,7 @@ function [ave_pprs, exhmem] = exh_ppr (a, src, tar, c, qu_set, kmax)
     
     
     mem = whos;
-    exhmem = sum([mem.bytes]) + memo
-
+    exhmem = sum([mem.bytes]) + memo;
+    
+    fprintf('\n== Finished ==\n');
 

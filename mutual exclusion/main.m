@@ -4,13 +4,13 @@ addpath("..\metismex-master\build\mex\");
 addpath("..\metismex-master\build\src\");
 %run("..\metismex-master\METIS_startup.m");
 
-fpath =  '..\datasets\';
-fname = 'cit-HepPh';
 
+fpath =  '..\datasets\';
+%%%%%%%%%%%%%%%%%%%%% datasets %%%%%%%%%%%%%%%%%%%%%%%%%
+fname = 'cit-HepPh';
 fn = [fpath, fname, '.mat'];
 load(fn);
 a = Problem.A;
-
 %%%%%%%%%%%%%%%% hyperparameter %%%%%%%%%%%%%%%%%%%%%%%%
 m = nnz(a);
 n = size(a,2);
@@ -34,11 +34,12 @@ qu_set = load(qufpath).qu;
 
 savefpath = 'results\';
 savefn = [savefpath, fname,'_l',int2str(l),'_d',int2str(d),'_res', '.mat'];
+save(savefn, 'fname');
 %%%%%%%%%%%%%%%%% PPR computation %%%%%%%%%%%%%%%%%%%%%%%%%%
 upprplust = tic;
 [res_upprplus, upprplusmem] = uppr_plus(a, c, qu_set, src, tar, fname);
 upprplus_time=toc(upprplust);
-save(savefn, "res_upprplus") 
+save(savefn, "res_upprplus","-append") 
 
 upprt = tic;
 [res_uppr, upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar);
