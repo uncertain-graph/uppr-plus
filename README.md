@@ -29,5 +29,5 @@ Use `acc.m` to evaluate all PPR results. <br>
 NDCG scores should be tested in `ndcg.py`. 
 
 ## Others
-If you would like to run BEAR, generate collapse-based uncertain graph firstly using `main_gen_collT.m`.
+If you would like to run BEAR, generate collapse-based uncertain graph firstly using `main_gen_collT.m` under `acc\bear\`.
 
