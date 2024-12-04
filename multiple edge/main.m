@@ -19,9 +19,9 @@ kmax = 100;
 ncon = 1;
 nparts = 5;
 
-% %%%%%%%%%%%%%%%%% src, tar, qu %%%%%%%%%%%%%%%%%%%%%%%%%%
-l = 6;
-d = 4;
+%%%%%%%%%%%%%%%%%% src, tar, qu %%%%%%%%%%%%%%%%%%%%%%%%%%
+l = 2;
+d = 2;
 
 src_tarfpath = ['src_tar\','ds_',fname,'_l',int2str(l),'_d',int2str(d),'.mat'];
 qufpath = ['qu\','ds_',fname,'_qu','.mat'];

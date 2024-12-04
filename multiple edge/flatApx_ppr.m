@@ -1,5 +1,6 @@
 function [pprs, flatApxmem] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
     fprintf('== flatApx STARTS == \n');
+    fprintf("== Start Aggregation == \n")
     num_qu_set = numel(qu_set);
     num_src = numel(src);
     
@@ -51,7 +52,7 @@ function [pprs, flatApxmem] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
     % undirected graph 
     %b = triu(a1)+triu(a1)';
     %%% --end Flattening uncertain edges into certain edges %%%
-    
+    fprintf("== Finished Aggregation == \n")
     %%% B-LIN %%%
     
     % column normalization
@@ -65,7 +66,7 @@ function [pprs, flatApxmem] = flatApx_ppr(a,c, qu_set,src, tar,ncon,nparts)
     [xadj, adjncy] = coo2csr(w|w');
 
     flatApx_preCom_time = toc;
-   
+    fprintf('== Querying == \n');
     memo = 0;
     pprs = 0;
     for qu = 1 : num_qu_set

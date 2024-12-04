@@ -14,8 +14,8 @@ function [ave_pprs,  upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     n = size(a,1);
     P = sparse(n,n);
 
-    tic
-    fprintf('== Start P aggregation == \n');
+
+    fprintf('== PreComputation starts == \n');
     for i = 1:npw
        if mod(i, ceil(npw/50)) == 0
            fprintf('.');
@@ -40,7 +40,7 @@ function [ave_pprs,  upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     d_inv(~isfinite(d_inv)) = 0;
     w = a' * spdiags(d_inv, 0, n, n);
 
-    fprintf('== Partitioning == \n')
+    
     [xadj, adjncy] = coo2csr(a|a');
     partition = METIS_PartGraphKway(n,ncon,xadj,adjncy,[],[],[],nparts,[],[],'METIS_OBJTYPE_CUT');
     [par,ix] = sort(partition);
@@ -48,7 +48,7 @@ function [ave_pprs,  upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     v0 = find(diff([-1 par]));
     nparts = numel(v0);
     
-    fprintf('== Block-wise inversion ==\n')
+    
     [Tbl,x] = blockDiagGraph(w, par,ix, nparts);
     Tx = w - Tbl;
     [Q_inv,~] = block_inv(x, c, nparts);
@@ -56,7 +56,7 @@ function [ave_pprs,  upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     
     %% Compute UPPR
     pprs = 0;
-    fprintf('== Querying ==\n')
+    fprintf('== Querying starts ==\n')
     for qu = 1 : num_qu_set
         nqu = numel(qu_set{qu});
         qu_vec = sparse(qu_set{qu}', 1, 1/nqu, n, 1);
@@ -79,5 +79,5 @@ function [ave_pprs,  upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     me = whos;
     bytes = [me.bytes].';
     upprmem = sum(bytes);
-    fprintf('== Finished ==\n')
+    fprintf('== Finished ==\n');
 end

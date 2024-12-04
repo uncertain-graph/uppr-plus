@@ -1,4 +1,4 @@
-function [ave_qres, upprplusmem] = uppr_plus_v2(a, c, qu_set, I, tar, fname)
+function [ave_qres, upprplusmem] = uppr_plus(a, c, qu_set, I, tar, fname)
    num_qu_set = numel(qu_set);
    l = length(I);
 
@@ -16,7 +16,6 @@ function [ave_qres, upprplusmem] = uppr_plus_v2(a, c, qu_set, I, tar, fname)
    for i = 1:nedges
        [target_sets{i}, len_target_sets{i}] = getAllSubsets(tar{i});
    end
-   fprintf("========= Finish to get all subsets ==========")
 
    J = CartesianProduct_multi(target_sets);
    uds = CartesianProduct_multi(len_target_sets);
@@ -39,15 +38,12 @@ function [ave_qres, upprplusmem] = uppr_plus_v2(a, c, qu_set, I, tar, fname)
    ei = sparse((1:l)', I', ones(l,1), l, n);
    ei=full(ei);
    
-
-   ilutime = tic;
    T = speye(n) - c * T0;
    [L,U] = ilu(T); 
     
    x = ei / U;
    r = x / L;
-   lu_inv = toc(ilutime)
-    
+ 
    Ri = full(r);  
    
    Rii = Ri(:,I);
@@ -78,12 +74,8 @@ function [ave_qres, upprplusmem] = uppr_plus_v2(a, c, qu_set, I, tar, fname)
         lambda_hw = sparse(l,1);
         nw = sparse(n,1);
    %%%%%%%% average hw, nw over pws %%%%%%%%%%%%%%%%%%%%%%%%     
-
-        fprintf('Start \n');
         for w = 1:npw
-            if mod(w, ceil(npw/50)) == 0
-                fprintf('.');
-            end
+           
             Jw = J{w};
            
             ud = cat(2,uds{w}{:});

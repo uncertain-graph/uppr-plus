@@ -36,9 +36,8 @@ function [pprs, collApxmem] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
       
         sum_unc_a= sum_unc_a+unc_a;
     end
-    fprintf('\n');
     a2 = a + sum_unc_a / npw;
-
+    fprintf("\n== Finished Aggregation == \n")
     [xadj, adjncy] = coo2csr(a2|a2');
 
     % column norm

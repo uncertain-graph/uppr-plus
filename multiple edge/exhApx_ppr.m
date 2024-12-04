@@ -20,6 +20,9 @@ function  [ave_pprs, exhApxmem] = exhApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
         qu_vec = sparse(qu_set{qu}', 1, 1/nqu, n, 1);
         pwppr = 0;
         for i = 1 : npw
+            if mod(i, ceil(npw/50)) == 0
+                fprintf('.');
+            end
             a1 = a;
             for p =1:size(src,2)
                 for r = 1:size(pw{i}{p},2)
@@ -56,5 +59,5 @@ function  [ave_pprs, exhApxmem] = exhApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
     bytes = [me.bytes].';
     exhApxmem = sum(bytes);
     exhApxmem = sum(bytes)+memo;
-     fprintf('== Finished ==\n');
+     fprintf('\n== Finished ==\n');
 end
