@@ -11,23 +11,25 @@ function [pprs, collApxme] = collApx_ppr(a, c, qu_set, src, tar,ncon,nparts)
     npw = size(tars,1);
 
     m = size(a, 2);
-    unc_a = sparse(m,m);
-    tic
+    sum_unc_a = sparse(m,m);
+
+
     for i = 1 : npw
+        unc_a = sparse(m,m);
         if mod(i, ceil(npw/50)) == 0
                 fprintf('.');
             end
-        for j = 1: num_src
+        for j = 1: numel(src)
             if tars(i,j)
-                tmp = unc_a(src(j),tars(i,j));
-                unc_a(src(j),tars(i,j)) = tmp + 1;
+               
+                unc_a(src(j),tars(i,j)) =  1;
             end
         end
-        
+        sum_unc_a= sum_unc_a+unc_a;
     end
     
     %% compute average ppr
-    a2 = a + unc_a / npw;  
+    a2 = a + sum_unc_a / npw; 
     fprintf("\n== Finished Aggregation == \n")
     [xadj, adjncy] = coo2csr(a2|a2');
 
