@@ -17,12 +17,14 @@ function a2 = gen_collT_mut(ds, src, tar)
     npw = size(tars,1);
     
     m = size(a, 2);
-   sum_unc_a = sparse(m,m);
+    
+    sum_unc_a = sparse(m,m);
 
     
    % tic
 
     for i = 1 : npw
+        unc_a = sparse(m,m);
         if mod(i, ceil(npw/50)) == 0
                 fprintf('.');
             end
