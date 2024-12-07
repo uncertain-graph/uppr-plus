@@ -3,7 +3,7 @@
 Matlab R2023b <br>
 Windows 10/11
 
-## Datasets:
+## Datasets
 Datasets can be downloaded from links: https://sparse.tamu.edu/SNAP and https://sparse.tamu.edu/LAW <br>
 Please create a new folder named `datasets` and save `.mat` datastes under this folder.
 
