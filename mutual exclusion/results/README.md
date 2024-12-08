@@ -1,1 +1,1 @@
-The generated PPR scores will be saved here.
+The generated uncertain PPR scores will be saved here.
