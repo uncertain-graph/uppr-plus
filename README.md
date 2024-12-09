@@ -15,9 +15,6 @@ The zip file was modified and can be adapted based on Yingzhou's package from: h
 ### Preparation for uncertain source and target nodes
 Run `main_gen_src_tar.m` to generate src and target nodes in `mutual exclusion` and `multiple edge`.
 
-### Preparation for new folders
-Create new folders `excel_output` and `results` under the folders `mutual exclusion` and `multiple edge`.
-
 ## UPPR+ under Mutual Exclusion semantics
 Run the program `main.m` under the folder `mutual exclusion` (Double check every path in the file when you encounter the "no such file" error.) 
 
