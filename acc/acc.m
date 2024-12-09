@@ -1,6 +1,6 @@
 %% load results
 %clear;
-load(['cit-HepPh_l2_d2_res.mat'])
+load(['%%%%%%%%%%%% result file %%%%%%%%%%%%%'])
 
 %%%%%% if you load bear you need to decomment %%%%%%%
 %%%%%% scores of bear below %%%%%%%%%%%%%%%%%%%
