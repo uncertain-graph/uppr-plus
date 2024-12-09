@@ -1,5 +1,5 @@
 clear;
-fpath =  '..\..\datasets\';
+fpath =  '..\datasets\';
 
 folderContents = dir(fpath);
 fileNames = {folderContents(~[folderContents.isdir]).name};
@@ -15,18 +15,18 @@ for i = 1: numel(ds_names)
     dsname = x(1:end-4);
     disp(dsname)
 
-    stpath= '..\..\mutual exclusion\';
+    stpath= '..\mutual exclusion\';
     src_tarfpath = [stpath,'src_tar\','ds_',dsname,'_l',int2str(l),'_d',int2str(d),'.mat'];
     src = load(src_tarfpath).src;
     tar =  load(src_tarfpath).tar;
 
     mut_a = gen_collT_mut(dsname, src, tar);
+    fprintf('\n');
 
-
-    stpath= '..\..\multiple edge\';
+    stpath= '..\multiple edge\';
     src_tarfpath = [stpath,'src_tar\','ds_',dsname,'_l',int2str(l),'_d',int2str(d),'.mat'];
     src = load(src_tarfpath).src';
     tar =  load(src_tarfpath).tar;
     mtp_a = gen_collT_mtp(dsname, src, tar);
-    
+    fprintf('\n');
  end
