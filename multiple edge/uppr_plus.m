@@ -129,7 +129,7 @@ function [ave_qres, upprplusmem] = uppr_plus(a, c, qu_set, I, tar, fname)
     fprintf(' >>      # of nodes              :  %d \n', n);
     fprintf(' >>      # of edges              :  %d \n\n', m);
     fprintf(' >>      # of uncertain edges  (source nodes)  :  %d \n\n', ue_num);
-    fprintf(' >>      # of uncertain degree (target nodes for each uncertain edge) :  %d \n\n', ue_deg);
+    fprintf(' >>      # of uncertain degree (target nodes for each uncertain edge) :  %d \n\n', ue_deg+1);
     
     fprintf(' >>  total CPU time              :  %fs \n', period_total);
     fprintf(' >>    2) pre-computing(lu_inv)          :  %fs  \n', period2); 
