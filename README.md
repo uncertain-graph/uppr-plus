@@ -16,10 +16,10 @@ The zip file was modified and can be adapted based on Yingzhou's package from: h
 Run `main_gen_src_tar.m` to generate src and target nodes in `mutual exclusion` and `multiple edge`.
 
 ## UPPR+ under Mutual Exclusion semantics
-Run the program `main.m` under the folder `mutual exclusion` (Double check every path in the file when you encounter the "no such file" error.) 
+Run the program `main.m` under the folder `mutual exclusion` 
 
 ## UPPR+ under Multiple edge semantics
-Run the program `main.m` under the folder `multiple edge` (Double check every path in the file when you encounter the "no such file" error.) 
+Run the program `main.m` under the folder `multiple edge` 
 
 ## Accuracy 
 Use `acc.m` to evaluate all PPR results. <br>
@@ -28,4 +28,4 @@ NDCG scores should be tested in `ndcg.py`.
 ## Others
 - If you would like to run BEAR, generate collapse-based uncertain graph firstly using `main_gen_collT.m` under `acc\`. <br>
 Implementation of BEAR comes from: https://datalab.snu.ac.kr/bear/ `BEAR-v1.0`.
-- Double check every path in the file when you encounter the "no such file" error.
+- Please double check every path in the file when you encounter the "no such file" error.
