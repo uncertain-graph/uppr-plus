@@ -2,7 +2,7 @@ function [ave_pprs,  upprmem] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     fprintf('== UPPR STARTS == \n');
     num_qu_set = numel(qu_set);
     num_src = numel(src);
-    %% enumerate possible uncertainity and sum of all uncertainity as P
+    %% enumerate possible uncertainty and sum of all uncertainty as P
     nedges = numel(src);
     for i = 1:nedges
         target_sets{i} = getAllSubsets(tar{i});
