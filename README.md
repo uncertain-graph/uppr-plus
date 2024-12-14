@@ -15,10 +15,10 @@ The zip file was modified and can be adapted based on Yingzhou's package from: h
 ### Preparation for uncertain source and target nodes
 Run `main_gen_src_tar.m` to generate src and target nodes in `mutual exclusion` and `multiple edge`.
 
-## UPPR+ under Mutual Exclusion semantics
+## UPPR+ under Mutual Exclusion Semantics
 Run the program `main.m` under the folder `mutual exclusion` 
 
-## UPPR+ under Multiple edge semantics
+## UPPR+ under Multiple Edge Semantics
 Run the program `main.m` under the folder `multiple edge` 
 
 ## Accuracy 
