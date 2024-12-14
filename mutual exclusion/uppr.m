@@ -4,7 +4,7 @@ function [ave_pprs,  upprme] = uppr(a, c, qu_set, ncon, nparts, src, tar)
     num_src = numel(src);
     n = size(a,1);
     
-    %% enumerate possible uncertainity and sum of all uncertainity as P
+    %% enumerate possible uncertainty and sum of all uncertainty as P
     pw = cell(1, numel(tar));
     [pw{:}] = ndgrid(tar{:});
     tars = cell2mat(cellfun(@(v)v(:), pw, 'UniformOutput',false));
